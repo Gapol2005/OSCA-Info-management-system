@@ -1,0 +1,446 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zamboanga City OSCA - Dashboard</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            display: flex;
+            height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 260px;
+            background: linear-gradient(135deg, #1a2a7f 0%, #2d3aaa 100%);
+            color: white;
+            padding: 20px 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 20px;
+            border-bottom: 2px solid #ffd700;
+            margin-bottom: 20px;
+        }
+
+        .logo {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            background: white;
+            padding: 2px;
+        }
+
+        /* Added official seal image */
+        .logo img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .logo-text {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .nav-menu {
+            flex: 1;
+            padding: 0 20px;
+        }
+
+        .nav-item {
+            padding: 14px 12px;
+            margin: 8px 0;
+            color: white;
+            cursor: pointer;
+            border-left: 3px solid transparent;
+            transition: all 0.3s ease;
+            font-size: 16px;
+        }
+
+        .nav-item:hover {
+            background-color: rgba(255, 215, 0, 0.1);
+            border-left-color: #ffd700;
+        }
+
+        .nav-item.active {
+            border-left-color: #ffd700;
+            border-bottom: 2px solid #ffd700;
+            padding-bottom: 12px;
+        }
+
+        .settings-section {
+            padding: 20px;
+            border-top: 2px solid #ffd700;
+            text-align: center;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        /* Main Content */
+        .main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        .header {
+            background-color: white;
+            padding: 20px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #e0e0e0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .header-left h1 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #000;
+            margin-bottom: 4px;
+        }
+
+        .header-left p {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .user-info {
+            text-align: right;
+        }
+
+        .user-info .name {
+            font-weight: 600;
+            color: #000;
+            font-size: 14px;
+        }
+
+        .user-info .role {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border: 2px solid #ccc;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: #999;
+        }
+
+        /* Content Area */
+        .content {
+            flex: 1;
+            padding: 30px;
+            overflow-y: auto;
+        }
+
+        /* Cards Grid */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .metric-card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 30px;
+            display: flex;
+            gap: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            /* Updated to match authentic blue from seal */
+            border-left: 6px solid #1a2a7f;
+        }
+
+        .metric-card-left {
+            width: 8px;
+            /* Updated to match authentic blue from seal */
+            background-color: #1a2a7f;
+            border-radius: 4px;
+            margin-left: -30px;
+            margin-right: 20px;
+        }
+
+        .metric-card-content {
+            flex: 1;
+        }
+
+        .metric-number {
+            font-size: 48px;
+            font-weight: 700;
+            /* Updated to match authentic blue from seal */
+            color: #1a2a7f;
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+
+        .metric-label {
+            font-size: 16px;
+            color: #333;
+            line-height: 1.4;
+        }
+
+        /* Charts Section */
+        .charts-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .chart-container {
+            background-color: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .chart-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #000;
+            margin-bottom: 20px;
+        }
+
+        .chart-wrapper {
+            position: relative;
+            height: 300px;
+        }
+
+        @media (max-width: 1200px) {
+            .cards-grid, .charts-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                flex-direction: row;
+                padding: 15px;
+            }
+
+            .nav-menu {
+                display: flex;
+                gap: 10px;
+                padding: 0;
+                flex: 1;
+            }
+
+            .nav-item {
+                margin: 0;
+                padding: 10px;
+                font-size: 12px;
+            }
+
+            .settings-section {
+                border-top: none;
+                padding: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="logo-section">
+                <div class="logo">
+                    <!-- Added official Zamboanga City seal image -->
+                    <img src="/images/seal-of-zamboanga-city-201.png" alt="Zamboanga City OSCA Seal">
+                </div>
+                <div class="logo-text">OSCA</div>
+            </div>
+
+            <div class="nav-menu">
+                <div class="nav-item active">Dashboard</div>
+                <div class="nav-item">Registration Category</div>
+                <div class="nav-item">Complaints</div>
+                <div class="nav-item">ID Printing</div>
+                <div class="nav-item">Accounts Settings</div>
+                <div class="nav-item">Archives</div>
+                <div class="nav-item">Heat Map</div>
+                <div class="nav-item">Announcement</div>
+            </div>
+
+            <div class="settings-section">Settings</div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main">
+            <!-- Header -->
+            <div class="header">
+                <div class="header-left">
+                    <h1>Zamboanga City OSCA</h1>
+                    <p>Office of Senior Citizens Affairs</p>
+                </div>
+                <div class="header-right">
+                    <div class="user-info">
+                        <div class="name">Space1000</div>
+                        <div class="role">Social Worker Coordinator</div>
+                    </div>
+                    <div class="user-avatar">👤</div>
+                </div>
+            </div>
+
+            <!-- Content -->
+            <div class="content">
+                <!-- Metric Cards -->
+                <div class="cards-grid">
+                    <div class="metric-card">
+                        <div class="metric-card-left"></div>
+                        <div class="metric-card-content">
+                            <div class="metric-number">4720</div>
+                            <div class="metric-label">Registered Active Senior Citizen<br>as of Today</div>
+                        </div>
+                    </div>
+
+                    <div class="metric-card">
+                        <div class="metric-card-left"></div>
+                        <div class="metric-card-content">
+                            <div class="metric-number">200</div>
+                            <div class="metric-label">Pending Applications</div>
+                        </div>
+                    </div>
+
+                    <div class="metric-card">
+                        <div class="metric-card-left"></div>
+                        <div class="metric-card-content">
+                            <div class="metric-number">47</div>
+                            <div class="metric-label">ID Claimable as of Today</div>
+                        </div>
+                    </div>
+
+                    <div class="metric-card">
+                        <div class="metric-card-left"></div>
+                        <div class="metric-card-content">
+                            <div class="metric-number">5725</div>
+                            <div class="metric-label">Released ID's to Seniors</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts -->
+                <div class="charts-grid">
+                    <div class="chart-container">
+                        <div class="chart-title">Chart: Applications by Fields</div>
+                        <div class="chart-wrapper">
+                            <canvas id="pieChart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="chart-container">
+                        <div class="chart-title">Chart: Age Group Summary</div>
+                        <div class="chart-wrapper">
+                            <canvas id="barChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Pie Chart
+        const pieCtx = document.getElementById('pieChart').getContext('2d');
+        new Chart(pieCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Field Office 1', 'Field Office 2', 'Field Office 3', 'Field Office 4', 'Field Office 5', 'Field Office 6', 'Field Office 7'],
+                datasets: [{
+                    data: [450, 1245, 789, 615, 597, 632, 1304],
+                    backgroundColor: [
+                        '#7a9e99',
+                        '#7dd3c0',
+                        '#f4a460',
+                        '#b8214d',
+                        '#f4e4c1',
+                        '#1a4d6d',
+                        '#5a3a5a'
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+
+        // Bar Chart
+        const barCtx = document.getElementById('barChart').getContext('2d');
+        new Chart(barCtx, {
+            type: 'bar',
+            data: {
+                labels: ['70-79', '80-89', '90-99', '100+'],
+                datasets: [{
+                    label: 'Count',
+                    data: [120, 90, 30, 4],
+                    backgroundColor: '#5dd9d3'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                indexAxis: 'x',
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 120
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

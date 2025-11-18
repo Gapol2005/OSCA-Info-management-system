@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Senior Citizen Information System</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(90deg, #00008b 0%, #00008b 100%);
+            padding: 15px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: white;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            background: white;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+        }
+
+        .seal {
+            width: 60px;
+            height: 60px;
+            flex-shrink: 0;
+        }
+
+        .seal img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .header-title {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header-title p {
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .header-title h1 {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        nav {
+            display: flex;
+            gap: 25px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: opacity 0.3s;
+        }
+
+        nav a:hover {
+            opacity: 0.8;
+        }
+
+        nav a.active {
+            border-bottom: 2px solid white;
+            padding-bottom: 3px;
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: white;
+            border-radius: 20px;
+            padding: 5px 15px;
+            gap: 8px;
+        }
+
+        .search-box input {
+            border: none;
+            outline: none;
+            font-size: 13px;
+            width: 150px;
+        }
+
+        .search-box button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #333;
+        }
+
+        .user-icon {
+            width: 30px;
+            height: 30px;
+            border: 2px solid white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        /* Main Content */
+        main {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 60px 40px;
+        }
+
+        .section {
+            margin-bottom: 60px;
+        }
+
+        h2 {
+            font-size: 48px;
+            color: #00008b;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .section p {
+            font-size: 15px;
+            color: #333;
+            text-align: justify;
+            line-height: 1.8;
+        }
+
+        .divider {
+            border-top: 2px dotted #ff6b6b;
+            margin: 40px 0;
+        }
+
+        /* Starcode Section */
+        .starcode-section {
+            background: linear-gradient(180deg, #00008b 0%, #000066 100%);
+            padding: 60px 40px;
+            margin: 60px -40px;
+            display: flex;
+            gap: 40px;
+            align-items: center;
+            color: white;
+        }
+
+        .starcode-icon {
+            width: 150px;
+            height: 150px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .starcode-icon img {
+            width: 100px;
+            height: 100px;
+        }
+
+        .starcode-content h2 {
+            color: white;
+            margin-top: 0;
+        }
+
+        .starcode-content p {
+            color: white;
+            text-align: justify;
+        }
+
+        /* Goal Section */
+        .goal-section {
+            background: linear-gradient(180deg, #00008b 0%, #000066 100%);
+            padding: 60px 40px;
+            margin: 60px -40px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .goal-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .goal-content h2 {
+            color: white;
+        }
+
+        .goal-content p {
+            color: white;
+            text-align: justify;
+        }
+
+        .goal-star {
+            position: absolute;
+            right: 40px;
+            bottom: 20px;
+            width: 200px;
+            height: 200px;
+            opacity: 0.3;
+            z-index: 1;
+        }
+
+        .goal-star img {
+            width: 100%;
+            height: 100%;;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background: linear-gradient(180deg, #333 0%, #1a1a1a 100%);
+            padding: 60px 40px;
+            margin: 60px -40px -40px -40px;
+            color: white;
+        }
+
+        .contact-section h2 {
+            color: white;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .contact-subtitle {
+            text-align: center;
+            font-size: 14px;
+            margin-bottom: 40px;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .contact-item {
+            display: flex;
+            gap: 15px;
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            flex-shrink: 0;
+        }
+
+        .contact-info h3 {
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        .contact-info p {
+            font-size: 13px;
+            color: #ddd;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .header-right {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            nav {
+                flex-wrap: wrap;
+            }
+
+            .starcode-section {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            h2 {
+                font-size: 36px;
+            }
+
+            main {
+                padding: 40px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-left">
+            <div class="seal">
+                <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Seal_of_Zamboanga_City%201-5Gj0nvcbT7C0wDdEYadlse9eczRDVe.png" alt="City Seal">
+            </div>
+            <div class="logo"></div>
+            <div class="header-title">
+                <p>City of Zamboanga City for</p>
+                <h1>SENIOR CITIZEN<br>INFORMATION SYSTEM</h1>
+            </div>
+        </div>
+        <div class="header-right">
+            <nav>
+                <a href="#home">HOME</a>
+                <a href="#about" class="active">ABOUT</a>
+                <a href="#services">SERVICES</a>
+                <a href="#news">NEWS</a>
+            </nav>
+            <div class="search-box">
+                <input type="text" placeholder="Search...">
+                <button>🔍</button>
+            </div>
+            <div class="user-icon">👤</div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Mission Section -->
+        <section class="section">
+            <h2>MISSION</h2>
+            <p>
+                The SCIS, as a unified digital platform for Zamboanga City, promotes the rights, welfare, and benefits of senior citizens by ensuring secure, efficient, and transparent management of their information. It strengthens collaboration among local government offices, service providers, and communities by providing accurate data for the formulation, implementation, and monitoring of localized policies, plans, and programs. The SCIS is dedicated to advancing active, productive, and healthy aging while fostering an enabling environment for older persons in Zamboanga City.
+            </p>
+        </section>
+
+        <div class="divider"></div>
+
+        <!-- Vision Section -->
+        <section class="section">
+            <h2>VISION</h2>
+            <p>
+                The Senior Citizen Information System (SCIS) envisions Zamboanga City as a model community where senior citizens enjoy accessible services, protected rights, and an improved quality of life through a centralized and secure digital platform. By equipping local government and communities with accurate and timely information, SCIS aspires to create an inclusive city that values, supports, and empowers older persons for active, healthy, and dignified aging.
+            </p>
+        </section>
+
+        <!-- Starcode Corporation Section -->
+        <section class="starcode-section">
+            <div class="starcode-icon">
+                <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image%2035-CPmpjZiniu3U8wPOcCUXyx3IKljRqF.png" alt="Star Icon">
+            </div>
+            <div class="starcode-content">
+                <h2>STARCODE CORPORATION</h2>
+                <p>
+                    The Senior Citizen Information System (SCIS) was developed by Starcode Incorporation to provide a secure, efficient, and centralized platform for managing senior citizen information in Zamboanga City. This system is designed to streamline registration, improve data accuracy, and enhance service delivery for our elderly community. By empowering local government offices and stakeholders with reliable data, SCIS helps ensure that senior citizens receive the care, benefits, and support they rightfully deserve.
+                </p>
+            </div>
+        </section>
+
+        <!-- Goal Section -->
+        <section class="goal-section">
+            <div class="goal-content">
+                <h2>GOAL</h2>
+                <p>
+                    The Senior Citizen Information System (SCIS) aims to provide a fast and efficient registration process for senior citizens in Zamboanga City by shifting to a centralized digital platform. It seeks to ensure accuracy of records through proper verification, eliminating duplication and errors, while improving accessibility of information for both beneficiaries and service providers. SCIS is designed to enhance the delivery of government services and benefits to senior citizens, support evidence-based decision-making for local policymakers, and promote inclusion by upholding the rights, welfare, and dignity of older persons. Ultimately, the system strives to create a more responsive and reliable framework that empowers senior citizens and strengthens the services dedicated to their well-being.
+                </p>
+            </div>
+            <div class="goal-star">
+                <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image%2035-CPmpjZiniu3U8wPOcCUXyx3IKljRqF.png" alt="Star">
+            </div>
+        </section>
+    </main>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <h2>Contact Information</h2>
+        <p class="contact-subtitle">Reach out to us for any questions or concerns<br>Our contact details are provided below.</p>
+        
+        <div class="contact-grid">
+            <div class="contact-item">
+                <div class="contact-icon">📍</div>
+                <div class="contact-info">
+                    <h3>Western Mindanao State University</h3>
+                    <p>Normal Road, Baliwasan, Zamboanga City 7000 Philippines</p>
+                </div>
+            </div>
+            <div class="contact-item">
+                <div class="contact-icon">📞</div>
+                <div class="contact-info">
+                    <h3>Phone:</h3>
+                    <p>(+63) 62 991-0000 loc. 1234</p>
+                </div>
+            </div>
+            <div class="contact-item">
+                <div class="contact-icon">✉️</div>
+                <div class="contact-info">
+                    <h3>Email:</h3>
+                    <p>osca@zamboanga.gov.ph</p>
+                </div>
+            </div>
+            <div class="contact-item">
+                <div class="contact-icon">🌐</div>
+                <div class="contact-info">
+                    <h3>Website:</h3>
+                    <p>www.oscazc.gov.ph</p>
+                </div>
+            </div>
+            <div class="contact-item">
+                <div class="contact-icon">🕐</div>
+                <div class="contact-info">
+                    <h3>Office Hours:</h3>
+                    <p>Monday–Friday, 8:00 AM – 5:00 PM (PHT)</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

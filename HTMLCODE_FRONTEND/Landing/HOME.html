@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Senior Citizen Information System</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(to right, #001a80, #0033cc);
+            color: white;
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .logo {
+            width: 50px;
+            height: 50px;
+            background: #FFD700;
+            border-radius: 50%;
+        }
+
+        .header-title {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        nav {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .search-bar {
+            background: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            width: 120px;
+            font-size: 12px;
+        }
+
+        /* Latest Information Section */
+        .latest-info {
+            padding: 60px 40px;
+            background: white;
+        }
+
+        .section-title {
+            font-size: 36px;
+            margin-bottom: 40px;
+        }
+
+        .section-title .highlight {
+            color: #0033cc;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .info-card-large {
+            border: 2px solid #ddd;
+            overflow: hidden;
+        }
+
+        .info-card-large img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+
+        .info-card-content {
+            padding: 20px;
+            background: #f5f5f5;
+        }
+
+        .info-date {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .info-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .info-text {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .read-more {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .read-more a {
+            color: #cc3333;
+            text-decoration: underline;
+            font-size: 14px;
+        }
+
+        /* Key Benefits Section */
+        .key-benefits {
+            background: #8B0000;
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+        }
+
+        .benefits-title {
+            font-size: 32px;
+            margin-bottom: 40px;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+
+        .benefit-card {
+            background: white;
+            color: #333;
+            padding: 30px 20px;
+            border-radius: 20px;
+        }
+
+        .benefit-icon {
+            width: 60px;
+            height: 60px;
+            background: #e0e0e0;
+            border-radius: 50%;
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+        }
+
+        .benefit-name {
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .benefit-desc {
+            font-size: 12px;
+            color: #666;
+        }
+
+        /* Statistics Section */
+        .stats-section {
+            padding: 60px 40px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .stats-content h2 {
+            font-size: 72px;
+            font-weight: bold;
+            line-height: 1;
+        }
+
+        .stats-label {
+            color: #FFB81C;
+            font-size: 14px;
+            font-weight: bold;
+            margin: 10px 0 20px;
+        }
+
+        .stats-quote {
+            background: #f0f0f0;
+            padding: 20px;
+            border-left: 4px solid #0033cc;
+            margin: 30px 0;
+            font-size: 14px;
+            color: #0033cc;
+            font-weight: 600;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 13px;
+        }
+
+        .btn-primary {
+            background: #0033cc;
+            color: white;
+        }
+
+        .btn-secondary {
+            background: #0033cc;
+            color: white;
+        }
+
+        .how-it-works {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .step-icon {
+            width: 60px;
+            height: 60px;
+            background: #e0e0e0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .arrow {
+            font-size: 30px;
+            color: #333;
+        }
+
+        /* Key Features Section */
+        .key-features {
+            background: linear-gradient(135deg, #f5d5d0 0%, #ffe0dd 100%);
+            padding: 60px 40px;
+        }
+
+        .features-title {
+            text-align: center;
+            font-size: 28px;
+            color: #0033cc;
+            margin-bottom: 50px;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            text-align: center;
+        }
+
+        .feature-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: #0033cc;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+        }
+
+        .feature-name {
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        /* Footer */
+        footer {
+            background: #0033cc;
+            color: white;
+            padding: 40px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+
+        .footer-section {
+            display: flex;
+            gap: 15px;
+            align-items: flex-start;
+        }
+
+        .footer-logo {
+            width: 80px;
+            height: 80px;
+            background: white;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .footer-title {
+            font-weight: bold;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .footer-text {
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 13px;
+        }
+
+        .footer-contact {
+            font-size: 13px;
+        }
+
+        .footer-bottom {
+            grid-column: 1 / -1;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.3);
+            padding-top: 20px;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-left">
+            <div class="logo"></div>
+            <div class="header-title">
+                SENIOR CITIZEN<br>INFORMATION SYSTEM
+            </div>
+        </div>
+        <nav>
+            <a href="#home">HOME</a>
+            <a href="#about">ABOUT</a>
+            <a href="#services">SERVICES</a>
+            <a href="#news">NEWS</a>
+            <input type="text" class="search-bar" placeholder="Search">
+        </nav>
+    </header>
+
+    <!-- Latest Information Section -->
+    <section class="latest-info">
+        <h1 class="section-title">Latest <span class="highlight">Information</span></h1>
+        
+        <div class="info-grid">
+            <div class="info-card-large">
+                <img src="/placeholder.svg?height=300&width=300" alt="Geriatric Training">
+                <div class="info-card-content">
+                    <div class="info-date">October 23, 2024</div>
+                    <div class="info-title">Comprehensive Geriatric Training</div>
+                    <div class="info-text">A lecture on GERIATRIC SYNDROME was conducted by Dr. Cathy Umali during the Comprehensive Geriatric Training among health care providers from different municipalities held last October 23, 2024 at City Hall...</div>
+                </div>
+            </div>
+
+            <div>
+                <div class="info-card-large" style="margin-bottom: 20px;">
+                    <div class="info-card-content">
+                        <div class="info-date">October 23, 2024</div>
+                        <div class="info-title">Comprehensive Geriatric Training</div>
+                        <div class="info-text">A lecture on GERIATRIC SYNDROME was conducted by Dr. Cathy Umali during the Comprehensive Geriatric... <a href="#" style="color: #0066cc;">Read more</a></div>
+                    </div>
+                </div>
+
+                <div class="info-card-large" style="margin-bottom: 20px;">
+                    <div class="info-card-content">
+                        <div class="info-date">October 23, 2024</div>
+                        <div class="info-title">Comprehensive Geriatric Training</div>
+                        <div class="info-text">A lecture on GERIATRIC SYNDROME was conducted by Dr. Cathy Umali during the Comprehensive Geriatric... <a href="#" style="color: #0066cc;">Read more</a></div>
+                    </div>
+                </div>
+
+                <div class="info-card-large">
+                    <div class="info-card-content">
+                        <div class="info-date">October 23, 2024</div>
+                        <div class="info-title">Comprehensive Geriatric Training</div>
+                        <div class="info-text">A lecture on GERIATRIC SYNDROME was conducted by Dr. Cathy Umali during the Comprehensive Geriatric... <a href="#" style="color: #0066cc;">Read more</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="read-more">
+            <a href="#">Click here to read more news items....</a>
+        </div>
+    </section>
+
+    <!-- Key Benefits Section -->
+    <section class="key-benefits">
+        <h2 class="benefits-title">Key Benefits</h2>
+        <div class="benefits-grid">
+            <div class="benefit-card">
+                <div class="benefit-icon">📋</div>
+                <div class="benefit-name">Easy Registration</div>
+                <div class="benefit-desc">Easy registration for Senior Citizens</div>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">✋</div>
+                <div class="benefit-name">Track Benefits</div>
+                <div class="benefit-desc">See what benefits you can avail</div>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">👥</div>
+                <div class="benefit-name">Digital ID Access</div>
+                <div class="benefit-desc">Senior Citizen Digital ID</div>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">👨‍👩‍👧‍👦</div>
+                <div class="benefit-name">Community Support</div>
+                <div class="benefit-desc">Community Forums</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics Section -->
+    <section class="stats-section">
+        <div class="stats-content">
+            <h2>100,000+</h2>
+            <div class="stats-label">REGISTERED SENIOR CITIZENS</div>
+            <div class="stats-quote">
+                "Let's build a trusted database of all Filipino senior citizens together! Be part of the community, register now and make sure you're counted!"
+            </div>
+            <div class="button-group">
+                <button class="btn btn-primary">Register Now!</button>
+                <span style="color: #666;">OR</span>
+                <button class="btn btn-secondary">Log In</button>
+            </div>
+        </div>
+
+        <div class="how-it-works">
+            <div class="step">
+                <div class="step-icon">📝</div>
+                <div style="font-weight: bold; font-size: 14px;">Register</div>
+                <div style="font-size: 12px;">Fill out form</div>
+            </div>
+            <div class="arrow">→</div>
+            <div class="step">
+                <div class="step-icon">✓</div>
+                <div style="font-weight: bold; font-size: 14px;">Verify</div>
+                <div style="font-size: 12px;">Submit documents</div>
+            </div>
+            <div class="arrow">↓</div>
+            <div class="step">
+                <div class="step-icon">🎫</div>
+                <div style="font-weight: bold; font-size: 14px;">Get ID</div>
+                <div style="font-size: 12px;">Receive digital/printed SC ID</div>
+            </div>
+            <div class="arrow">←</div>
+            <div class="step">
+                <div class="step-icon">✓</div>
+                <div style="font-weight: bold; font-size: 14px;">Access Services</div>
+                <div style="font-size: 12px;">Enjoy programs and benefits</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Features Section -->
+    <section class="key-features">
+        <h2 class="features-title">KEY FEATURES</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">📍</div>
+                <div class="feature-name">Senior Citizen Heat Map</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🤖</div>
+                <div class="feature-name">AI Powered</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">👥</div>
+                <div class="feature-name">Senior-Friendly Design</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📋</div>
+                <div class="feature-name">Registration and Documentation</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-section">
+            <div class="footer-logo"></div>
+            <div>
+                <div class="footer-title">Senior Citizen Information System</div>
+                <div class="footer-text">"Making Services easier and reliable"</div>
+            </div>
+        </div>
+
+        <div>
+            <div class="footer-title">Navigations</div>
+            <div class="footer-links">
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#services">Services</a>
+                <a href="#news">News</a>
+            </div>
+        </div>
+
+        <div>
+            <div class="footer-title">Contact Info</div>
+            <div class="footer-contact">
+                <p>Zamboanga City Hall<br>
+                Zamboanga City, 7000 Philippines</p>
+                <p style="margin-top: 10px;">
+                    Email: info@zamboangacity.gov.ph<br>
+                    (062) 991-0722
+                </p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            © 2025 Senior Citizen Digital Registration System. All rights reserved.
+        </div>
+    </footer>
+</body>
+</html>
