@@ -1,0 +1,112 @@
+{% extends '__main.html' %}
+
+
+{% block content %}
+{%load static%} 
+        <link rel="stylesheet" href="{% static 'dashboard.css' %}">
+<main class="main-content">
+    <header class="header">
+      <div class="header-left">
+        <h1 class="header-title">Zamboanga City OSCA</h1>
+        <p class="header-subtitle">Office of Senior Citizens Affairs</p>
+      </div>
+      <div class="header-right">
+        <div class="user-info">
+          <span class="user-name">Space1000</span>
+          <span class="user-role">Social Worker Coordinator</span>
+        </div>
+        <div class="user-avatar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="8" r="4"/>
+            <path d="M6 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/>
+          </svg>
+        </div>
+      </div>
+    </header>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-border"></div>
+        <div class="stat-number">230</div>
+        <div class="stat-label">Registered Senior in Your Field</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-border"></div>
+        <div class="stat-number">12</div>
+        <div class="stat-label">Pending for OSCA</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-border"></div>
+        <div class="stat-number">47</div>
+        <div class="stat-label">ID recieved</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-border"></div>
+        <div class="stat-number">67</div>
+        <div class="stat-label">Released to Seniors</div>
+      </div>
+    </div>
+
+    <div class="charts-section">
+      <div class="chart-container">
+        <h3 class="chart-title">Chart: Applications by Barangay</h3>
+        <div class="pie-chart">
+          <svg viewBox="0 0 200 200" class="pie-svg">
+             Pie chart segments 
+            <circle cx="100" cy="100" r="80" fill="none" stroke="#E74C3C" stroke-width="80" 
+                    stroke-dasharray="50 450" transform="rotate(-90 100 100)"/>
+            <circle cx="100" cy="100" r="80" fill="none" stroke="#F39C12" stroke-width="80" 
+                    stroke-dasharray="45 455" stroke-dashoffset="-50" transform="rotate(-90 100 100)"/>
+            <circle cx="100" cy="100" r="80" fill="none" stroke="#5DADE2" stroke-width="80" 
+                    stroke-dasharray="40 460" stroke-dashoffset="-95" transform="rotate(-90 100 100)"/>
+            <circle cx="100" cy="100" r="80" fill="none" stroke="#5F6A6A" stroke-width="80" 
+                    stroke-dasharray="55 445" stroke-dashoffset="-135" transform="rotate(-90 100 100)"/>
+            <circle cx="100" cy="100" r="80" fill="none" stroke="#E67E22" stroke-width="80" 
+                    stroke-dasharray="35 465" stroke-dashoffset="-190" transform="rotate(-90 100 100)"/>
+            <circle cx="100" cy="100" r="80" fill="none" stroke="#52BE80" stroke-width="80" 
+                    stroke-dasharray="40 460" stroke-dashoffset="-225" transform="rotate(-90 100 100)"/>
+            <circle cx="100" cy="100" r="80" fill="none" stroke="#AF7AC5" stroke-width="80" 
+                    stroke-dasharray="45 455" stroke-dashoffset="-265" transform="rotate(-90 100 100)"/>
+            <circle cx="100" cy="100" r="80" fill="none" stroke="#EC7063" stroke-width="80" 
+                    stroke-dasharray="40 460" stroke-dashoffset="-310" transform="rotate(-90 100 100)"/>
+            <circle cx="100" cy="100" r="80" fill="none" stroke="#922B21" stroke-width="80" 
+                    stroke-dasharray="50 450" stroke-dashoffset="-350" transform="rotate(-90 100 100)"/>
+          </svg>
+        </div>
+      </div>
+
+      <div class="chart-container">
+        <h3 class="chart-title">Chart: Age Group Summary</h3>
+        <div class="bar-chart">
+          <div class="bar-group">
+            <div class="bar" style="height: 85%;">
+              <span class="bar-value">130</span>
+            </div>
+            <span class="bar-label">70-79</span>
+          </div>
+          <div class="bar-group">
+            <div class="bar" style="height: 55%;">
+              <span class="bar-value">80</span>
+            </div>
+            <span class="bar-label">80-89</span>
+          </div>
+          <div class="bar-group">
+            <div class="bar" style="height: 25%;">
+              <span class="bar-value">40</span>
+            </div>
+            <span class="bar-label">90-94</span>
+          </div>
+          <div class="bar-group">
+            <div class="bar" style="height: 10%;">
+              <span class="bar-value">10</span>
+            </div>
+            <span class="bar-label">100+</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+{% endblock content %}
